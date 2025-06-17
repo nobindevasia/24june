@@ -170,7 +170,7 @@ namespace D2G.Iris.ML.Utils
 
                     if (!string.IsNullOrEmpty(processedData.FeatureSelectionReport))
                     {
-                        writer.WriteLine("\nFeature Selection Report:");
+                        writer.WriteLine("\nFeature Selection Report");
                         writer.WriteLine(processedData.FeatureSelectionReport);
                     }
                 }
