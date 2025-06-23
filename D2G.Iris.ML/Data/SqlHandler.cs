@@ -133,7 +133,6 @@ namespace D2G.Iris.ML.Data
 
             using var connection = new SqlConnection(GetConnectionString());
             connection.Open();
-
             var columnDefinitions = featureNames
                 .Select(f => $"[{f}] FLOAT")
                 .Concat(new[]
@@ -157,7 +156,7 @@ namespace D2G.Iris.ML.Data
             using var bulk = new SqlBulkCopy(connection)
             {
                 DestinationTableName = destTable,
-                BatchSize = 1000,
+                BatchSize = 10000,
                 BulkCopyTimeout = 300
             };
 
