@@ -146,13 +146,33 @@ namespace D2G.Iris.ML.Training
             ITransformer model,
             IDataView dataView,
             string modelType,
-            string algorithmName)
+            string algorithmName,
+            string[] featureColumnNames,
+             Core.Enums.ModelType modelTypeEnum)
         {
             string safeName = SanitizeFileName(algorithmName);
             string modelPath = $"{modelType}_{safeName}_Model.zip";
 
             mlContext.Model.Save(model, dataView.Schema, modelPath);
-            Console.WriteLine($"Model saved to: {modelPath}");
+            Console.WriteLine($"ML.Net Model saved: {modelPath}");
+
+            try
+            {
+                string onnxPath = $"{modelType}_{safeName}_Model.onnx";
+                var sampleData = mlContext.Data.TakeRows(dataView, 10);
+
+                using (var fileStream = new FileStream(onnxPath, FileMode.Create))
+                {
+                    mlContext.Model.ConvertToOnnx(model, sampleData, fileStream);
+                }
+                Console.WriteLine($"ONNX model saved: {onnxPath}");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning: Could not export to ONNX format: {ex.Message}");
+
+            }
 
             return modelPath;
         }

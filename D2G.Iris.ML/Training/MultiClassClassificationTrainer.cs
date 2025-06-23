@@ -178,10 +178,12 @@ namespace D2G.Iris.ML.Training
 
             SaveModel(
                 mlContext,
-                model,
-                preparedData,
-                "MultiClassClassification",
-                config.TrainingParameters.Algorithm);
+    model,
+    preparedData,
+    "MultiClassClassification",
+    config.TrainingParameters.Algorithm,
+    featureNames,
+    Core.Enums.ModelType.MultiClassClassification);
 
             return model;
         }

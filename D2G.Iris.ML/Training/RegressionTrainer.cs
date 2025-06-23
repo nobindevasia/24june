@@ -254,11 +254,13 @@ namespace D2G.Iris.ML.Training
                 config.TrainingParameters.Algorithm);
 
             SaveModel(
-                _mlContext,
+                mlContext,
                 model,
                 preparedData,
                 "Regression",
-                config.TrainingParameters.Algorithm);
+                config.TrainingParameters.Algorithm,
+                featureNames,
+                Core.Enums.ModelType.Regression);
 
             await SaveModelInfo(
                 metrics,

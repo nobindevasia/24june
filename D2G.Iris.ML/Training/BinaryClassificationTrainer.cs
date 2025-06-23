@@ -252,10 +252,12 @@ namespace D2G.Iris.ML.Training
 
             SaveModel(
                 mlContext,
-                model,
-                preparedData,
-                "BinaryClassification",
-                config.TrainingParameters.Algorithm);
+    model,
+    preparedData,
+    "BinaryClassification",
+    config.TrainingParameters.Algorithm,
+    featureNames,
+    Core.Enums.ModelType.BinaryClassification);
 
             return model;
         }
