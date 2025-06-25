@@ -47,7 +47,7 @@ namespace D2G.Iris.ML.Utils
                 _ => underlyingType.IsEnum ? "enum" : underlyingType.Name
             };
 
-            return type != underlyingType ? $"{baseName}?" : baseName;
+            return baseName; 
         }
 
         public static List<PropertyInfo> GetConfigurableProperties(Type optionsType)
